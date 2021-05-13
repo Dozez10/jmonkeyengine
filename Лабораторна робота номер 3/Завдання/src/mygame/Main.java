@@ -9,13 +9,17 @@ import com.jme3.input.MouseInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.input.controls.MouseButtonTrigger;
+import com.jme3.light.AmbientLight;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.RenderManager;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
+import com.jme3.scene.shape.Sphere;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -87,7 +91,11 @@ private ActionListener actionListener1;
         initCharacters();
         initTriggers();
         initCrossHairs() ;
+        initHeads();
         nodes  = new Node("nodes");
+        AmbientLight al = new AmbientLight();
+        al.setColor(ColorRGBA.White);
+        rootNode.addLight(al);
         rootNode.attachChild(nodes);
         nodes.attachChild(character1.getCharacter());
         nodes.attachChild(character2.getCharacter());
@@ -110,10 +118,13 @@ private ActionListener actionListener1;
         Material matForHats = new Material(assetManager,"Common/MatDefs/Misc/Unshaded.j3md");
         matForHats.setColor("Color", ColorRGBA.Yellow);
       
+    
+ 
         this.character1 = new toGetCharacter(new Vector3f(1,0,3),new Material(assetManager,"Common/MatDefs/Misc/Unshaded.j3md"),matForHats);
         this.character2 = new toGetCharacter(new Vector3f(3.8f,0,3),new Material(assetManager,"Common/MatDefs/Misc/Unshaded.j3md"),matForHats);
    
         this.character3 = new toGetCharacter(new Vector3f(6.6f,0,3),new Material(assetManager,"Common/MatDefs/Misc/Unshaded.j3md"),matForHats);
+          
         
         this.character1.getMatForBody().setColor("Color", ColorRGBA.Pink);
         this.character2.getMatForBody().setColor("Color", ColorRGBA.Green);
@@ -123,10 +134,30 @@ private ActionListener actionListener1;
         character2.createABody();
         character3.createABody();
         
-        
+   
     }
     //Magenta C`A Cyan C`B LightGray C`C
     
+    public void initHeads()
+    {
+           Spatial head1 = assetManager.loadModel("Models/head1.j3o");
+          
+          
+               this.character1.setHead(head1);
+               
+                Spatial head2 = assetManager.loadModel("Models/head2.j3o");
+          
+          
+               this.character2.setHead(head2);
+               
+                       Spatial head3 = assetManager.loadModel("Models/head3.j3o");
+          
+          
+               this.character3.setHead(head3);
+               
+             
+        
+    }
     private void  initTriggers()
     {
         

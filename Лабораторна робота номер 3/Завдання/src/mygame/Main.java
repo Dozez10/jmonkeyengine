@@ -91,7 +91,7 @@ private ActionListener actionListener1;
         initCharacters();
         initTriggers();
         initCrossHairs() ;
-        initHeads();
+      
         nodes  = new Node("nodes");
         AmbientLight al = new AmbientLight();
         al.setColor(ColorRGBA.White);
@@ -133,6 +133,7 @@ private ActionListener actionListener1;
         character1.createABody();
         character2.createABody();
         character3.createABody();
+        initHeads();
         
    
     }
